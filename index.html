@@ -25,7 +25,40 @@
   .nav-links a { color:rgba(22,22,22,0.4); text-decoration:none; font-size:10px; letter-spacing:3px; text-transform:uppercase; transition:color .3s ease; font-weight:300; }
   .nav-links a:hover { color:var(--ink); }
 
-  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 2rem; position:relative; }
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 2rem; position:relative; overflow:hidden; }
+  .target-parallax { position:absolute; top:50%; left:50%; width:min(120vmin, 1100px); height:min(120vmin, 1100px); transform:translate(-50%,-50%); pointer-events:none; z-index:0; }
+  .target-parallax .ring { position:absolute; inset:0; will-change:transform; }
+  body.dark .target-parallax circle[fill="none"] { stroke:rgba(232,228,220,0.14); }
+  body.dark .target-parallax circle[fill]:not([fill="none"]) { fill:rgba(232,228,220,0.4); }
+  .target-parallax circle { transition:stroke .8s ease, fill .8s ease; }
+  .target-parallax svg { width:100%; height:100%; display:block; overflow:visible; }
+  .hero-eyebrow, .hero-title, .hero-desc, .scroll-cue { position:relative; z-index:1; }
+  body { transition:background-color .8s ease; }
+  body.dark { background:#0a0a0a; }
+  body.dark .hero-title, body.dark .hero-desc { color:#e8e4dc; }
+  body.dark .hero-title em { color:#8a8a8a; }
+  body.dark .hero-eyebrow { color:#8a8a8a; }
+  body.dark .scroll-cue-text { color:rgba(232,228,220,0.6); }
+  body.dark .scroll-cue-arrow { color:#e8e4dc; }
+  .hero-title, .hero-desc, .hero-eyebrow, .scroll-cue-text, .scroll-cue-arrow { transition:color .8s ease; }
+  nav { transition:background-color .8s ease, border-color .8s ease; }
+  body.dark nav { background:rgba(10,10,10,0.9); border-bottom-color:rgba(232,228,220,0.08); }
+  .nav-logo img { transition:filter .8s ease; }
+  body.dark .nav-logo img { filter:invert(1) hue-rotate(180deg); }
+  .nav-links a { transition:color .3s ease; }
+  body.dark .nav-links a { color:rgba(232,228,220,0.4); }
+  body.dark .nav-links a:hover { color:#e8e4dc; }
+  .awards-bar, .award-name, .award-icon, .award-divider { transition:color .8s ease, border-color .8s ease, background-color .8s ease; }
+  body.dark .awards-bar { border-top-color:rgba(232,228,220,0.08); border-bottom-color:rgba(232,228,220,0.08); }
+  body.dark .award-name { color:rgba(232,228,220,0.5); }
+  body.dark .award-divider { background:rgba(232,228,220,0.08); }
+  .section-label { transition:color .8s ease; }
+  body.dark .section-label { color:rgba(232,228,220,0.45); }
+  .work-grid { transition:background-color .8s ease; }
+  body.dark .work-grid { background:rgba(232,228,220,0.08); }
+  body.dark .cursor { background:#e8e4dc; }
+  body.dark .cursor-ring { border-color:rgba(232,228,220,0.3); }
+  .cursor, .cursor-ring { transition:background-color .4s ease, border-color .4s ease; }
   .hero-eyebrow { font-size:10px; letter-spacing:6px; color:var(--accent); text-transform:uppercase; margin-bottom:1.8rem; font-weight:300; opacity:0; animation:fadeUp 1s ease .3s forwards; }
   .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(54px,9.5vw,136px); font-weight:300; line-height:.98; letter-spacing:-1px; opacity:0; animation:fadeUp 1s ease .5s forwards; }
   .hero-title em { font-style:italic; color:var(--accent); }
@@ -143,6 +176,13 @@
 </nav>
 
 <section class="hero">
+  <div class="target-parallax" id="targetParallax">
+    <div class="ring" data-speed="0.10"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="49" fill="none" stroke="rgba(22,22,22,0.10)" stroke-width="0.18"/></svg></div>
+    <div class="ring" data-speed="0.16"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="rgba(22,22,22,0.12)" stroke-width="0.18"/></svg></div>
+    <div class="ring" data-speed="0.24"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="27" fill="none" stroke="rgba(22,22,22,0.14)" stroke-width="0.2"/></svg></div>
+    <div class="ring" data-speed="0.34"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="16" fill="none" stroke="rgba(22,22,22,0.16)" stroke-width="0.22"/></svg></div>
+    <div class="ring" data-speed="0.48"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="2.6" fill="rgba(22,22,22,0.35)"/></svg></div>
+  </div>
   <p class="hero-eyebrow">Composer · Los Angeles</p>
   <h1 class="hero-title">Original music<br>for <em>film</em> &amp; <em>commercials</em>.</h1>
   <p class="hero-desc">Compositions built for the world's most ambitious brands and campaigns.</p>
@@ -455,6 +495,51 @@
     });
   });
 
+
+  // Target parallax: rings drift on scroll & follow mouse subtly
+  const tp = document.getElementById('targetParallax');
+  if (tp) {
+    const rings = Array.from(tp.querySelectorAll('.ring'));
+    let sy = 0, tmx = 0, tmy = 0, cmx = 0, cmy = 0;
+    window.addEventListener('scroll', () => { sy = window.scrollY; }, { passive: true });
+    if (!isMobile) {
+      window.addEventListener('mousemove', e => {
+        tmx = (e.clientX / window.innerWidth - 0.5) * 2;
+        tmy = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+    }
+    (function tpLoop(){
+      cmx += (tmx - cmx) * 0.05;
+      cmy += (tmy - cmy) * 0.05;
+      const vh = window.innerHeight;
+      const p = Math.min(sy / vh, 1.4);
+      rings.forEach((r, i) => {
+        const s = parseFloat(r.getAttribute('data-speed'));
+        const ty = -sy * s * 0.9;
+        const tx = cmx * (10 + i * 14);
+        const tym = cmy * (10 + i * 14);
+        const rot = p * (i % 2 === 0 ? 18 : -14) * s * 4;
+        const sc = 1 + p * s * 0.55;
+        r.style.transform = 'translate(' + tx + 'px,' + (ty + tym) + 'px) rotate(' + rot + 'deg) scale(' + sc + ')';
+      });
+      requestAnimationFrame(tpLoop);
+    })();
+  }
+
+  // Page theme: dark while browsing the work section, light elsewhere
+  (function themeWatch(){
+    const aboutSec = document.getElementById('about');
+    function update(){
+      const vh = window.innerHeight;
+      const sy = window.scrollY;
+      const start = vh * 0.5;
+      const end = aboutSec ? aboutSec.offsetTop - vh * 0.45 : Infinity;
+      document.body.classList.toggle('dark', sy > start && sy < end);
+      requestAnimationFrame(update);
+    }
+    update();
+  })();
+
   // Scroll cue -> smooth scroll to work section
   const cue = document.getElementById('scrollCue');
   if (cue) cue.addEventListener('click', () => {
@@ -588,6 +673,37 @@
       active = i;
     });
   });
+
+
+  // Target parallax: rings drift on scroll & follow mouse subtly
+  const tp = document.getElementById('targetParallax');
+  if (tp) {
+    const rings = Array.from(tp.querySelectorAll('.ring'));
+    let sy = 0, tmx = 0, tmy = 0, cmx = 0, cmy = 0;
+    window.addEventListener('scroll', () => { sy = window.scrollY; }, { passive: true });
+    if (!isMobile) {
+      window.addEventListener('mousemove', e => {
+        tmx = (e.clientX / window.innerWidth - 0.5) * 2;
+        tmy = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+    }
+    (function tpLoop(){
+      cmx += (tmx - cmx) * 0.05;
+      cmy += (tmy - cmy) * 0.05;
+      const vh = window.innerHeight;
+      const p = Math.min(sy / vh, 1.4);
+      rings.forEach((r, i) => {
+        const s = parseFloat(r.getAttribute('data-speed'));
+        const ty = -sy * s * 0.9;
+        const tx = cmx * (10 + i * 14);
+        const tym = cmy * (10 + i * 14);
+        const rot = p * (i % 2 === 0 ? 18 : -14) * s * 4;
+        const sc = 1 + p * s * 0.55;
+        r.style.transform = 'translate(' + tx + 'px,' + (ty + tym) + 'px) rotate(' + rot + 'deg) scale(' + sc + ')';
+      });
+      requestAnimationFrame(tpLoop);
+    })();
+  }
 
   // Scroll cue -> smooth scroll to work section
   const cue = document.getElementById('scrollCue');
