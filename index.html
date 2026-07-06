@@ -22,7 +22,7 @@
   .nav-logo { display:flex; align-items:center; text-decoration:none; }
   .nav-logo img { height:22px; width:auto; display:block; }
   .nav-links { display:flex; gap:2.5rem; }
-  .nav-links a { color:rgba(22,22,22,0.4); text-decoration:none; font-size:10px; letter-spacing:3px; text-transform:uppercase; transition:color .3s ease; font-weight:300; }
+  .nav-links a { color:var(--ink); text-decoration:none; font-size:10px; letter-spacing:3px; text-transform:uppercase; transition:color .3s ease; font-weight:300; }
   .nav-links a:hover { color:var(--ink); }
 
   .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 2rem; position:relative; overflow:hidden; }
@@ -41,11 +41,13 @@
   .scroll-cue:hover .scroll-cue-text { color:var(--ink); }
 
   .awards-bar { padding:1.4rem 3rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:3rem; }
-  .award-item { display:flex; align-items:center; gap:1rem; flex-shrink:0; opacity:0; animation:fadeIn .8s ease forwards; }
+  .award-item { display:flex; align-items:center; gap:1rem; flex-shrink:0; opacity:0; animation:fadeIn .8s ease forwards; text-decoration:none; }
+  a.award-item .award-name { transition:opacity .3s ease; }
+  a.award-item:hover .award-name { opacity:.6; }
   .award-item:nth-child(1){ animation-delay:1s; } .award-item:nth-child(2){ animation-delay:1.2s; }
-  .award-icon { display:flex; align-items:center; color:var(--accent); }
+  .award-icon { display:flex; align-items:center; color:var(--ink); }
   .award-icon svg { width:18px; height:18px; }
-  .award-name { font-size:10px; color:rgba(22,22,22,0.4); letter-spacing:1px; font-weight:300; }
+  .award-name { font-size:10px; color:var(--ink); letter-spacing:1px; font-weight:300; }
   .award-divider { width:1px; height:20px; background:var(--border); }
 
   .work { padding:5rem 3rem; }
@@ -175,9 +177,9 @@
 </section>
 
 <div class="awards-bar">
-  <div class="award-item"><span class="award-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 21h8M12 17v4M5 3H3a2 2 0 000 4c0 2.5 1.5 4.5 3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M19 3h2a2 2 0 010 4c0 2.5-1.5 4.5-3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M7 3h10v8a5 5 0 01-10 0V3z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="award-name">AICP Awards 2025 — Composition of the Year &mdash; Bronze</span></div>
+  <a class="award-item" href="http://aicp.com/" target="_blank" rel="noopener"><span class="award-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 21h8M12 17v4M5 3H3a2 2 0 000 4c0 2.5 1.5 4.5 3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M19 3h2a2 2 0 010 4c0 2.5-1.5 4.5-3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M7 3h10v8a5 5 0 01-10 0V3z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="award-name">AICP Awards 2025 — Composition of the Year &mdash; Bronze</span></a>
   <div class="award-divider"></div>
-  <div class="award-item"><span class="award-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 21h8M12 17v4M5 3H3a2 2 0 000 4c0 2.5 1.5 4.5 3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M19 3h2a2 2 0 010 4c0 2.5-1.5 4.5-3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M7 3h10v8a5 5 0 01-10 0V3z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="award-name">Shots Award — Original Score &mdash; Silver</span></div>
+  <a class="award-item" href="https://shots.net/news/view/shots-awards-the-americas-2025-winners-announced" target="_blank" rel="noopener"><span class="award-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 21h8M12 17v4M5 3H3a2 2 0 000 4c0 2.5 1.5 4.5 3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M19 3h2a2 2 0 010 4c0 2.5-1.5 4.5-3.5 5.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M7 3h10v8a5 5 0 01-10 0V3z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="award-name">Shots Award — Original Score &mdash; Silver</span></a>
 </div>
 
 <section class="work" id="work">
