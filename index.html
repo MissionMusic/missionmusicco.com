@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MISSION — Composer</title>
+<title>MISSION</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
@@ -66,6 +66,11 @@
   .play-circle svg { width:18px; height:18px; fill:#fff; margin-left:3px; }
   .work-item:hover .play-circle { transform:translate(-50%,-50%) scale(1.08); }
   .work-click { position:absolute; inset:0; z-index:5; cursor:none; }
+  .seek-bar { position:absolute; left:0; right:0; bottom:0; height:24px; z-index:6; cursor:pointer; opacity:0; pointer-events:none; transition:opacity .35s ease; }
+  .seek-track { position:absolute; left:0; right:0; bottom:0; height:3px; background:rgba(255,255,255,0.28); transition:height .2s ease; }
+  .seek-fill { position:absolute; left:0; bottom:0; height:3px; width:0%; background:#fff; transition:height .2s ease; }
+  .seek-bar:hover .seek-track, .seek-bar:hover .seek-fill { height:5px; }
+  .work-item.playing .seek-bar { opacity:1; pointer-events:auto; }
   .work-item.playing .work-thumb, .work-item.playing .play-circle, .work-item.playing .work-info { opacity:0; pointer-events:none; }
   .work-info { position:absolute; bottom:0; left:0; right:0; padding:1.5rem; background:linear-gradient(transparent,rgba(0,0,0,0.78)); transform:translateY(8px); opacity:0; transition:all .35s ease; z-index:3; pointer-events:none; }
   .work-item:hover .work-info { opacity:1; transform:translateY(0); }
@@ -199,6 +204,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       <span class="work-tag">Featured</span>
       <div class="work-info"><p class="work-client">Beats by Dre</p><p class="work-title">Listen To Your Heart</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -207,6 +213,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Meta × Oakley</p><p class="work-title">Total Preparation Mode with Zlatan Ibrahimović</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -215,6 +222,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Xapo Bank</p><p class="work-title">Hero</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -223,6 +231,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Kith</p><p class="work-title">Kith x Lisa — Spring Women '26</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -231,6 +240,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Tissot</p><p class="work-title">Sport Campaign</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -239,14 +249,25 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Under Armour</p><p class="work-title">We Are Football</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
+    </div>
+
+    <div class="work-item reveal" data-vimeo="859325147" data-hash="">
+      <div class="work-thumb"></div>
+      <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
+      
+      <div class="work-info"><p class="work-client">Vogue</p><p class="work-title">The Journey Beyond</p><p class="work-credit">Original Music</p></div>
     </div>
 
     <div class="work-item reveal" data-vimeo="1182702728" data-hash="">
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Don Julio</p><p class="work-title">Made To Be Raised</p><p class="work-credit">Music Arrangement</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -255,6 +276,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">American Eagle</p><p class="work-title">Lamine Yamal</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -265,6 +287,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Bvlgari</p><p class="work-title">Perpetual Evolution</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -273,6 +296,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Nike</p><p class="work-title">CHBL</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -281,6 +305,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Chelsea FC</p><p class="work-title">We Burn Blue</p><p class="work-credit">Original Music & Sound Design</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -289,6 +314,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Nike</p><p class="work-title">Nike Unveil</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -297,6 +323,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Converse × Shai</p><p class="work-title">001 — Family</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -305,6 +332,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Nike</p><p class="work-title">Air Max DN8 × Justine Skye</p><p class="work-credit">Original Music & Sound Design</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -313,6 +341,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Williams Racing</p><p class="work-title">F1 2025</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -321,6 +350,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Asics</p><p class="work-title">SS25 — Global Campaign</p><p class="work-credit">Original Music & Sound Design</p></div>
     </div>
@@ -329,6 +359,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Chanel</p><p class="work-title">Haute Couture 22/23</p><p class="work-credit">Music Arrangement</p></div>
     </div>
@@ -337,6 +368,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Ivy Park × Adidas</p><p class="work-title">Park Trail</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -345,6 +377,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Hennessy</p><p class="work-title">Night</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
@@ -353,6 +386,7 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Asics</p><p class="work-title">Move Your Mind</p><p class="work-credit">Original Music & Sound Design</p></div>
     </div>
@@ -361,9 +395,20 @@
       <div class="work-thumb"></div>
       <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
       
       <div class="work-info"><p class="work-client">Nike × Ambush</p><p class="work-title">Dare To Hit Different</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
     </div>
+
+    <div class="work-item reveal" data-vimeo="1007696848" data-hash="d9f772788c">
+      <div class="work-thumb"></div>
+      <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="work-click"></div>
+      <div class="seek-bar"><div class="seek-track"></div><div class="seek-fill"></div></div>
+      
+      <div class="work-info"><p class="work-client">Equinox</p><p class="work-title">Circuit Breaker</p><p class="work-credit">Original Music</p><p class="work-studio">For Concret Form</p></div>
+    </div>
+
   </div>
 </section>
 
@@ -461,6 +506,11 @@
     p.on('play', () => { items[i].classList.add('playing'); });
     p.on('pause', () => { items[i].classList.remove('playing'); });
     p.on('ended', () => { items[i].classList.remove('playing'); });
+    const fill = item.querySelector('.seek-fill');
+    p.on('timeupdate', d => {
+      item._dur = d.duration;
+      if (fill && !item._scrubbing) fill.style.width = (d.percent * 100) + '%';
+    });
     players[i] = p;
     return p;
   }
@@ -470,6 +520,29 @@
       if (p && j !== i) { p.pause().catch(()=>{}); p.setVolume(0).catch(()=>{}); items[j].classList.remove('playing'); }
     });
   }
+
+  // Seek bar: click or drag to jump anywhere in the video
+  items.forEach((item, i) => {
+    const bar = item.querySelector('.seek-bar');
+    const fill = item.querySelector('.seek-fill');
+    if (!bar) return;
+    function seekAt(e){
+      if (!players[i] || !item._dur) return;
+      const r = bar.getBoundingClientRect();
+      const ratio = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
+      fill.style.width = (ratio * 100) + '%';
+      players[i].setCurrentTime(ratio * item._dur).catch(()=>{});
+    }
+    bar.addEventListener('pointerdown', e => {
+      e.stopPropagation();
+      item._scrubbing = true;
+      bar.setPointerCapture(e.pointerId);
+      seekAt(e);
+    });
+    bar.addEventListener('pointermove', e => { if (item._scrubbing) seekAt(e); });
+    bar.addEventListener('pointerup', e => { item._scrubbing = false; });
+    bar.addEventListener('pointercancel', () => { item._scrubbing = false; });
+  });
 
   items.forEach((item, i) => {
     const click = item.querySelector('.work-click');
